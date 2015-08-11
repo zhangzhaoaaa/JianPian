@@ -61,7 +61,7 @@ app.get(  '/edit/:id',    routes.edit );
 app.post( '/update/:id',  routes.update );
 app.get( '/register',  login.register);
 app.post( '/registerSave',  login.registerSave);
-
+app.get('/getLastestPicture',routes.getLatestPicture);
 
 
 
