@@ -288,7 +288,7 @@
 <script type="text/javascript">
     (function ($) {
         // Prepare layout options.
-        /*var wookmark;
+        var wookmark;
         var wook;
         // Init lightbox
         $('#container').magnificPopup({
@@ -300,12 +300,12 @@
         });
 
         // Call the layout function after all images have loaded
-        imagesLoaded('#container', function () {
+        /* imagesLoaded('#container', function () {
             wookmark = new Wookmark('#container', {
                 offset: 2, // Optional, the distance between grid items
                 itemWidth: 210 // Optional, the width of a grid item
             });
-        });
+        });*/
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             // 获取已激活的标签页的名称
             var activeTab = $(e.target).text();
@@ -328,7 +328,7 @@
                     itemWidth: 210 // Optional, the width of a grid item
                 });
             });
-        });*/
+        });
         var wookmark = undefined,
                 page = 1,
                 isLoading = false,

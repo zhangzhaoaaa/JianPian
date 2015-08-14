@@ -30,7 +30,9 @@ exports.create = function ( req, res, next ){
     res.redirect( '/' );
   });
 };
-
+exports.settings=function(req, res, next) {
+  res.render('settings', { title: 'Express' });
+};
 /*exports.destroy = function ( req, res, next ){
   Todo.findById( req.params.id, function ( err, todo ){
     var user_id = req.cookies ?
@@ -104,6 +106,56 @@ exports.getLatestPicture = function( req, res, next ){
   var data = [
     {
         'id' : "1",
+      'title' : "First image",
+      'url' : "http://www.example.org/1",
+      'width' : "200",
+      'height' : "283",
+      'image' : "../images/sample-images/image_8_big.jpg",
+      'preview' : "../images/sample-images/image_8_big.jpg"
+    },
+    {
+      'id' : "1",
+      'title' : "First image",
+      'url' : "http://www.example.org/1",
+      'width' : "200",
+      'height' : "283",
+      'image' : "../images/sample-images/image_8_big.jpg",
+      'preview' : "../images/sample-images/image_8_big.jpg"
+    },{
+      'id' : "1",
+      'title' : "First image",
+      'url' : "http://www.example.org/1",
+      'width' : "200",
+      'height' : "283",
+      'image' : "../images/sample-images/image_8_big.jpg",
+      'preview' : "../images/sample-images/image_8_big.jpg"
+    },{
+      'id' : "1",
+      'title' : "First image",
+      'url' : "http://www.example.org/1",
+      'width' : "200",
+      'height' : "283",
+      'image' : "../images/sample-images/image_8_big.jpg",
+      'preview' : "../images/sample-images/image_8_big.jpg"
+    },{
+      'id' : "1",
+      'title' : "First image",
+      'url' : "http://www.example.org/1",
+      'width' : "200",
+      'height' : "283",
+      'image' : "../images/sample-images/image_8_big.jpg",
+      'preview' : "../images/sample-images/image_8_big.jpg"
+    },{
+      'id' : "1",
+      'title' : "First image",
+      'url' : "http://www.example.org/1",
+      'width' : "200",
+      'height' : "283",
+      'image' : "../images/sample-images/image_8_big.jpg",
+      'preview' : "../images/sample-images/image_8_big.jpg"
+    },
+    {
+      'id' : "1",
       'title' : "First image",
       'url' : "http://www.example.org/1",
       'width' : "200",

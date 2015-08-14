@@ -16,6 +16,9 @@ var methodOverride = require( 'method-override' );
 var logger         = require( 'morgan' );
 var errorHandler   = require( 'errorhandler' );
 var static         = require( 'serve-static' );
+var multipart = require('connect-multiparty');
+var multer = require('multer');
+var fs = require('fs');
 //var connect        = require( 'connect' );
 
 var app    = express();
@@ -62,12 +65,79 @@ app.post( '/update/:id',  routes.update );
 app.get( '/register',  login.register);
 app.post( '/registerSave',  login.registerSave);
 app.get('/getLastestPicture',routes.getLatestPicture);
+app.get('/settings',routes.settings);
 
 
 
 
 
 app.use( static( path.join( __dirname, 'public' )));
+
+
+
+var upload = multer({ dest: 'uploads/' });
+app.post('/upload', upload.single('avatar'), function (req, res, next) {
+  // req.body contains the text fields
+  console.log(req);
+  var extName = '';  //后缀名
+  switch (req.file.mimetype) {
+    case 'image/pjpeg':
+      extName = 'jpg';
+      break;
+    case 'image/jpeg':
+      extName = 'jpg';
+      break;
+    case 'image/png':
+      extName = 'png';
+      break;
+    case 'image/x-png':
+      extName = 'png';
+      break;
+  }
+
+  if(extName.length == 0){
+    res.locals.error = '只支持png和jpg格式图片';
+    res.render('index', { title: TITLE });
+    return;
+  }
+
+  var avatarName = Math.random() + '.' + extName;
+  var newPath = req.file.destination + avatarName;
+
+  console.log(newPath);
+  fs.renameSync(req.file.path, newPath);  //重命名
+})
+
+/*
+
+app.post('/upload', function(req, res){
+  var form = new multipart.Form({uploadDir: './public/files/'});
+  //下载后处理
+  form.parse(req, function(err, fields, files) {
+    var filesTmp = JSON.stringify(files,null,2);
+
+    if(err){
+      console.log('parse error: ' + err);
+    } else {
+      console.log('parse files: ' + filesTmp);
+      var inputFile = files.inputFile[0];
+      var uploadedPath = inputFile.path;
+      var dstPath = './public/files/' + inputFile.originalFilename;
+      //重命名为真实文件名
+      fs.rename(uploadedPath, dstPath, function(err) {
+        if(err){
+          console.log('rename error: ' + err);
+        } else {
+          console.log('rename ok');
+        }
+      });
+    }
+
+    res.writeHead(200, {'content-type': 'text/plain;charset=utf-8'});
+    res.write('received upload:\n\n');
+    res.end(util.inspect({fields: fields, files: filesTmp}));
+  });
+});*/
 
 // development only
 if( 'development' == app.get( 'env' )){
