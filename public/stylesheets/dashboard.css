@@ -25,7 +25,13 @@ body {
 .sidebar {
     display: none;
 }
+.nav-button{
+    margin: 10px;
+}
 @media (min-width: 768px) {
+    .rightContent{
+        margin:30px 150px;
+    }
     .sidebar {
         position: fixed;
         top: 51px;

@@ -58,7 +58,6 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="./">首页<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">未读消息</a></li>
                 <li><a href="#">关于</a></li>
             </ul>
         </div><!--/.navbar-collapse -->
@@ -69,25 +68,90 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li class="active"><a href="#">上传照片 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">个人设置</a></li>
                 <li><a href="#">统计分析</a></li>
             </ul>
         </div>
-        <form class = "form-horizontal" enctype='multipart/form-data' method='post' role = "form" id = "frmUploadFile">
-            <div class = "form-group">
-                <label class = "control-label col-sm-2">上传选择</label>
-                <div class = "col-sm-4">
-                    <input type = "file" id="avatar" name = "files" class = "form-control" />
-                </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="nav-button">
+                <!-- 按钮触发模态框 -->
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    上传照片
+                </button>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                    创建相册
+                </button>
             </div>
-            <div class = "form-group">
-                <div class = "col-sm-offset-2 col-sm-4">
-                    <button class = "btn btn-primary" onClick = "uploadFile()">上传</button>
-                    <span class = "help-inline" id = "spanMessage">选择文件，并上传</span>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3 ">
+                    <div class="thumbnail" style="height: 334px;">
+                        <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])"><img class="lazy" src="http://static.bootcss.com/www/assets/img/codeguide.png" width="300" height="150" data-src="http://static.bootcss.com/www/assets/img/codeguide.png" alt="Headroom.js"></a>
+                        <div class="caption">
+                            <h3>
+                                <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])">Bootstrap 编码规范<br><small>by @mdo</small></a>
+                            </h3>
+                            <p>
+                                Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div id="#spanMessage"></div>
-            </div>
-        </form>
+                <div class="col-sm-6 col-md-4 col-lg-3 ">
+                    <div class="thumbnail" style="height: 334px;">
+                        <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])"><img class="lazy" src="http://static.bootcss.com/www/assets/img/codeguide.png" width="300" height="150" data-src="http://static.bootcss.com/www/assets/img/codeguide.png" alt="Headroom.js"></a>
+                        <div class="caption">
+                            <h3>
+                                <a href="http://codeguide.bootcss.com" title="Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])">Bootstrap 编码规范<br><small>by @mdo</small></a>
+                            </h3>
+                            <p>
+                                Bootstrap 编码规范：编写灵活、稳定、高质量的 HTML 和 CSS 代码的规范。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">×
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                模态框（Modal）标题
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class = "form-horizontal" enctype='multipart/form-data' method='post' role = "form" id = "frmUploadFile">
+                                <div class = "form-group">
+                                    <label class = "control-label col-sm-2">上传选择</label>
+                                    <div class = "col-sm-4">
+                                        <input type = "file" id="avatar" name = "files" class = "form-control" />
+                                    </div>
+                                </div>
+                                <div class = "form-group">
+                                    <div class = "col-sm-offset-2 col-sm-4">
+                                        <button class = "btn btn-primary" onClick = "uploadFile()">上传</button>
+                                        <span class = "help-inline" id = "spanMessage">选择文件，并上传</span>
+                                    </div>
+                                    <div id="#spanMessage"></div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交更改
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
     </div>
 </div>
 <footer class="footer">
@@ -95,5 +159,13 @@
         <p class="text-muted">Place sticky footer content here.</p>
     </div>
 </footer>
+<script>
+    $(function () {
+        $('#myModal').modal('hide');
+        $(function () { $('#myModal').on('hide.bs.modal', function () {
+            alert('嘿，我听说您喜欢模态框...');})
+        });
+    });
+</script>
 </body>
 </html>
