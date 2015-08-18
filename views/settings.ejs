@@ -67,11 +67,11 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">上传照片 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">统计分析</a></li>
+                <li class="active" url="/uploadPicturesIndex"><a id="id_albumlist"  href="#">上传照片 <span class="sr-only">(current)</span></a></li>
+                <li url="/analysisData"><a id="id_analysis"  href="#">统计分析</a></li>
             </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div id="mainContent" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="nav-button">
                 <!-- 按钮触发模态框 -->
                 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#uploadPicModal">
@@ -200,19 +200,31 @@
         </div>
     </div>
 </div>
-<footer class="settingFooter">
+    </div>
+<!--<footer class="settingFooter">
     <div class="container">
         <p class="text-muted">Place sticky footer content here.</p>
     </div>
-</footer>
+</footer>-->
 <script>
     $(function () {
+        $('.nav-sidebar li').click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            $.ajax({
+                url: $(this).attr('url'),
+                dataType:'html',
+                success:function(data){
+                    $('#mainContent').empty().append(data);
+                }
+            });
+        });
+
         $('#uploadPicModal').modal('hide');
-        $(function () { $('#uploadPicModal').on('hide.bs.modal', function () {
+        $('#uploadPicModal').on('hide.bs.modal', function () {
            // alert('嘿，我听说您喜欢模态框...');})
         });
         $('#createAlbumModal').modal('hide');
-        $(function () { $('#createAlbumModal').on('hide.bs.modal', function () {
+        $('#createAlbumModal').on('hide.bs.modal', function () {
            // alert('嘿，我听说您喜欢模态框...');})
         });
     });

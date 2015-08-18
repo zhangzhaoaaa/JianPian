@@ -25,6 +25,7 @@ var app    = express();
 var routes = require( './routes' );
 var login = require( './routes/login' );
 var picture = require( './routes/picture' );
+var analysis = require( './routes/analysis' );
 
 
 var session = require('express-session');
@@ -68,6 +69,7 @@ app.post( '/registerSave',  login.registerSave);
 app.get('/getLastestPicture',routes.getLatestPicture);
 app.get('/settings',routes.settings);
 app.get('/albumPictureIndex',picture.albumPictureIndex);
+app.get('/analysisData',analysis.analysis);
 
 
 
