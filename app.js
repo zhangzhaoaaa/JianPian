@@ -24,18 +24,19 @@ var fs = require('fs');
 var app    = express();
 var routes = require( './routes' );
 var login = require( './routes/login' );
+var picture = require( './routes/picture' );
 
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-app.use(session({
+/*app.use(session({
   secret: 'foo',
   store: new MongoStore({
     url:'mongodb://localhost/express-todo',
     ttl: 14 * 24 * 60 * 60
   })
-}));
+}));*/
 
 
 
@@ -66,6 +67,7 @@ app.get( '/register',  login.register);
 app.post( '/registerSave',  login.registerSave);
 app.get('/getLastestPicture',routes.getLatestPicture);
 app.get('/settings',routes.settings);
+app.get('/albumPictureIndex',picture.albumPictureIndex);
 
 
 

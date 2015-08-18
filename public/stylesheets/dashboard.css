@@ -17,6 +17,9 @@ body {
     border-bottom: 1px solid #eee;
 }
 
+.thumbnail a > img{
+    height: 280px;
+}
 /*
  * Sidebar
  */
