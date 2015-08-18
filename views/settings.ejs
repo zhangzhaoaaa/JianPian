@@ -67,8 +67,8 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active" url="/uploadPicturesIndex"><a id="id_albumlist"  href="#">上传照片 <span class="sr-only">(current)</span></a></li>
-                <li url="/analysisData"><a id="id_analysis"  href="#">统计分析</a></li>
+                <li class="active" data-url="/uploadPicturesIndex"><a id="id_albumlist"  href="#">上传照片 <span class="sr-only">(current)</span></a></li>
+                <li data-url="/analysisData"><a id="id_analysis"  href="#">统计分析</a></li>
             </ul>
         </div>
         <div id="mainContent" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -211,7 +211,7 @@
         $('.nav-sidebar li').click(function(){
             $(this).addClass('active').siblings().removeClass('active');
             $.ajax({
-                url: $(this).attr('url'),
+                url: $(this).attr('data-url'),
                 dataType:'html',
                 success:function(data){
                     $('#mainContent').empty().append(data);
