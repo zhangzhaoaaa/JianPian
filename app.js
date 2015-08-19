@@ -80,36 +80,42 @@ app.use( static( path.join( __dirname, 'public' )));
 
 
 var upload = multer({ dest: 'uploads/' });
-app.post('/upload', upload.single('avatar'), function (req, res, next) {
+app.post('/upload', upload.array('avatar'), function (req, res, next) {
   // req.body contains the text fields
-  console.log(req);
+  console.log(req.files);
   var extName = '';  //后缀名
-  switch (req.file.mimetype) {
-    case 'image/pjpeg':
-      extName = 'jpg';
-      break;
-    case 'image/jpeg':
-      extName = 'jpg';
-      break;
-    case 'image/png':
-      extName = 'png';
-      break;
-    case 'image/x-png':
-      extName = 'png';
-      break;
+  var data = req.files;
+  for (var i=0;i<data.length;i++){
+    var file = data[i];
+      switch (file.mimetype) {
+        case 'image/pjpeg':
+          extName = 'jpg';
+          break;
+        case 'image/jpeg':
+          extName = 'jpg';
+          break;
+        case 'image/png':
+          extName = 'png';
+          break;
+        case 'image/x-png':
+          extName = 'png';
+          break;
+      }
+
+      if(extName.length == 0){
+        res.locals.error = '只支持png和jpg格式图片';
+        res.render('index', { title: TITLE });
+        return;
+      }
+
+      var avatarName = Math.random() + '.' + extName;
+      var newPath = file.destination + avatarName;
+
+      console.log(newPath);
+      fs.renameSync(file.path, newPath);  //重命名
   }
 
-  if(extName.length == 0){
-    res.locals.error = '只支持png和jpg格式图片';
-    res.render('index', { title: TITLE });
-    return;
-  }
 
-  var avatarName = Math.random() + '.' + extName;
-  var newPath = req.file.destination + avatarName;
-
-  console.log(newPath);
-  fs.renameSync(req.file.path, newPath);  //重命名
 })
 
 /*

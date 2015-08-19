@@ -12,7 +12,10 @@
     <script type="text/javascript">
         function uploadFile(){
             var formData = new FormData();
-            formData.append("avatar",document.getElementById('avatar').files[0]);
+            var files = document.getElementById('avatar').files;
+            for (var i=0;i<files.length;i++){
+                formData.append("avatar",files[i]);
+            }
             $.ajax({
                 url: '/upload',
                 type: 'POST',
@@ -133,7 +136,7 @@
                                 <div class = "form-group">
                                     <label class = "col-sm-2 control-label">选择文件</label>
                                     <div class = "col-sm-6">
-                                        <input type = "file" id="avatar"  name = "files" class = "form-control" />
+                                        <input type = "file" id="avatar"  name = "files" class = "form-control" multiple />
                                     </div>
                                 </div>
                                 <div class = "form-group">
