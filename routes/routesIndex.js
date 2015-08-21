@@ -16,10 +16,10 @@ exports.routesIndex=function(app,upload){
     app.post(   '/upload',                      upload.array('avatar'),             picture.upload);    //照片上传
 
     //待用
-    app.post(   '/create',                      routes.create );
+    /*app.post(   '/create',                      routes.create );
     app.get(    '/destroy/:id',                 routes.destroy );
     app.get(    '/edit/:id',                    routes.edit );
     app.post(   '/update/:id',                  routes.update );
     app.get(    '/getLastestPicture',           routes.getLatestPicture);
-    app.get(    '/settings',                    routes.settings);
+    app.get(    '/settings',                    routes.settings);*/
 };

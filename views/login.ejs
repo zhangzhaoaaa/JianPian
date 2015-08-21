@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel='stylesheet' href='javascripts/bootstrap/dist/css/bootstrap.min.css' />
-   <!-- <link rel='stylesheet' href='stylesheets/signin.css' />-->
+    <link rel='stylesheet' href='stylesheets/signin.css' />
     <script src='javascripts/jquery/dist/jquery.min.js' ></script>
     <script src='javascripts/bootstrap/dist/js/bootstrap.min.js' ></script>
 
@@ -16,9 +16,11 @@
     <form class="form-signin" method="post">
         <h2 class="form-signin-heading">请登录</h2>
         <label for="inputEmail" class="sr-only">邮箱</label>
-        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="邮箱地址" required="" autofocus="">
+        <input type="text" name="email" id="inputEmail" class="form-control col-sm-4" placeholder="邮箱地址" required="" autofocus="">
         <label for="inputPassword" class="sr-only">密码</label>
         <input type="password"name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <div id="capcha" class="capcha"><strong>给你出道题:</strong><span><a href="#">中国的首都在哪?</a></span></div>
+        <input type="text"name="password" id="inputPassword" class="form-control" placeholder="验证码" required="">
         <div class="checkbox">
             <label>
                 <input type="checkbox" name="rememberme" value="remember-me"> 记住我
