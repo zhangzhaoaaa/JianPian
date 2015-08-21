@@ -1,0 +1,21 @@
+input{
+    margin: 5px auto;
+}
+.capcha{
+    margin:5px;
+}
+.form-signin{
+    margin: auto;
+    width: 300px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:visited {color: #1045ff;}	/* 已被访问的链接 */
+a:hover {color:#0000FF;
+cursor: pointer;
+    text-decoration: none;
+}	/* 鼠标指针移动到链接上 */
+a:active {color: #6770c2;}	/* 正在被点击的链接 */
