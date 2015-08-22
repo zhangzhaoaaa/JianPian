@@ -13,8 +13,9 @@ exports.routesIndex=function(app,upload){
     app.post(   '/registerSave',                login.registerSave);        //注册动作
     app.get(    '/albumPictureIndex',           picture.albumPictureIndex); //相册列表页
     app.get(    '/analysisData',                analysis.analysis);         //数据统计页
-    app.post(   '/upload',                      upload.array('avatar'),             picture.upload);    //照片上传
-
+    app.post(   '/upload',                       upload.array('avatar'),             picture.upload);    //照片上传
+    app.get(    '/getLastestPicture',           index.getLatestPicture);
+    app.get(    '/settings',                     index.settings);
     //待用
     /*app.post(   '/create',                      routes.create );
     app.get(    '/destroy/:id',                 routes.destroy );
