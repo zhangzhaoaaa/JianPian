@@ -39,6 +39,27 @@ app.use( bodyParser.urlencoded({ extended : true }));
 app.use( static( path.join( __dirname, 'public' )));
 // Routes
 routesIndex.routesIndex(app,upload);
+
+app.get(    '/getCapcha',      function(req,res,next){
+  var data=[
+    {'content':'中国首都是哪？',answer:'北京'},
+    {'content':'日本首都是哪？',answer:'东京'},
+    {'content':'美国首都是哪？',answer:'华盛顿'}
+  ];
+  var d = data[Math.floor(Math.random()*data.length)<3?Math.floor(Math.random()*data.length):data[2]];
+  app.use(session({
+    secret: 'answer',
+    store: new MongoStore({
+      url:'mongodb://localhost/express-todo',
+      ttl: 60 * 60
+    })
+  }));
+  req.session.answer= d.answer;
+  res.send({
+    message:"success",
+    data:d
+  });
+});
 // development only
 if( 'development' == app.get( 'env' )){
   app.use( errorHandler());

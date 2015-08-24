@@ -16,6 +16,7 @@ exports.routesIndex=function(app,upload){
     app.post(   '/upload',                       upload.array('avatar'),             picture.upload);    //照片上传
     app.get(    '/getLastestPicture',           index.getLatestPicture);
     app.get(    '/settings',                     index.settings);
+
     //待用
     /*app.post(   '/create',                      routes.create );
     app.get(    '/destroy/:id',                 routes.destroy );

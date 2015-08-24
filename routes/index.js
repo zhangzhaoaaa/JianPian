@@ -1,7 +1,6 @@
 var utils    = require( '../utils' );
 var mongoose = require( 'mongoose' );
 var Todo     = mongoose.model( 'Todo' );
-
 exports.index = function ( req, res, next ){
   var user_id = req.cookies ?
     req.cookies.user_id : undefined;
@@ -87,6 +86,7 @@ exports.update = function( req, res, next ){
     });
   });
 };
+
 exports.getLatestPicture = function( req, res, next ){
   var data = [
     {
