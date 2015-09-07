@@ -70,20 +70,14 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <%data.forEach(function(i,n){%>
-                    <%if (n.active){%>
-                        <li class="active" data-url="/uploadPicturesIndex/personalSettings"><a id="id_albumlist"  href="#">上传照片 <span class="sr-only">(current)</span></a></li>
-                    <%}else{%>
-                        <li class="" data-url="/uploadPicturesIndex/analysis"><a id="id_analysis"  href="#">统计分析</a></li>
-                    <%}%>
-                <%})%>
+                <li class="active" data-url="/uploadPicturesIndex/personalSettings"><a id="id_albumlist"  href="#">上传照片 <span class="sr-only">(current)</span></a></li>
+                <li class="" data-url="/uploadPicturesIndex/analysis"><a id="id_analysis"  href="#">统计分析</a></li>
             </ul>
         </div>
-        <% if (msg==undefined||msg=='personalSettings'){ %>
-            <% include personalSettings %>
-        <%}else if (msg=='analysis'){%>
-            <% include analysis %>
-        <%}%>
+        <div id="main" class="main">
+
+        </div>
+
 </div>
     </div>
 <!--<footer class="settingFooter">
@@ -93,6 +87,25 @@
 </footer>-->
 <script>
     $(function () {
+        $.ajax({
+            url: '/uploadPicturesIndex/personalSettings',
+            dataType:'html',
+            success:function(data){
+                $('#main').empty().append(data);
+                //view.addClass('active').siblings().removeClass('active');
+            }
+        });
+        $('.nav-sidebar li').click(function(){
+            var view=$(this);
+            $.ajax({
+                url: $(this).attr('data-url'),
+                dataType:'html',
+                success:function(data){
+                    $('#main').empty().append(data);
+                    view.addClass('active').siblings().removeClass('active');
+                }
+            });
+        });
         $('#uploadPicModal').modal('hide');
         $('#uploadPicModal').on('hide.bs.modal', function () {
            // alert('嘿，我听说您喜欢模态框...');})

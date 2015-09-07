@@ -10,14 +10,19 @@ exports.signIndex=function(req, res, next) {
     //console.log('sininedx');
 };
 exports.login=function(req, res, next) {
-    console.log('singin');
-    req.session.sessname = 'i am a sesion';
-    //res.render('index', { title: 'Express' });
-    UserAccount.find({name:"1",password:"1"},function(err,userAccount,count){
-        if( err ) return next( err );
-        console.log('youzhi',count,userAccount);
-        res.send({msg:"success",session:req.session.sessname});
-    });
+    ///console.log('singin',req.session.views);
+    if (req.session.answer==req.body.answer){
+        UserAccount.findOne({name:req.body.useremail,password:req.body.password},function(err,userAccount,count){
+            if( err ) return next( err );
+            if (userAccount==null){
+                res.send({code:"fail",msg:"用户名或者密码错误！"});
+            }else{
+                res.send({code:"success"});
+            }
+        });
+    }else{
+        res.send({code:"fail",msg:"验证码错误！"});
+    }
 };
 exports.register=function(req, res, next) {
     console.log('register');

@@ -1,7 +1,6 @@
 var utils    = require( '../utils' );
 var mongoose = require( 'mongoose' );
 var Todo     = mongoose.model( 'Todo' );
-
 exports.index = function ( req, res, next ){
   var user_id = req.cookies ?
     req.cookies.user_id : undefined;
@@ -31,7 +30,27 @@ exports.create = function ( req, res, next ){
   });
 };
 exports.settings=function(req, res, next) {
-  res.render('settings', { title: 'Express' });
+  var id=req.params.id;
+
+ /* if (id=='personalSettings'){
+    //res.send({ title: 'Express',msg:'personalSettings' });
+  }else if (id=='analysis'){
+    res.send({ title: 'Express',msg:'analysis' });
+  }else{
+
+  }*/
+  var data=[{url:'aaaa',urlname:'xxxxx',active:true},{url:'bbbb',urlname:'xxxxx',active:false}];
+  res.render('settings', { title: 'Express',msg:'personalSettings',data:data});
+};
+exports.uploadPicturesIndex=function(req, res, next) {
+  var id=req.params.id;
+  if (id=='personalSettings'){
+    res.render('personalSettings',{ title: 'Express',msg:'personalSettings' });
+  }else if (id=='analysis'){
+    res.render('analysis',{ title: 'Express',msg:'analysis' });
+  }
+ // var data=[{url:'aaaa',urlname:'xxxxx',active:true},{url:'bbbb',urlname:'xxxxx',active:false}];
+  //res.render('settings', { title: 'Express',msg:id,data:data });
 };
 
 exports.destroy = function ( req, res, next ){
@@ -87,6 +106,7 @@ exports.update = function( req, res, next ){
     });
   });
 };
+
 exports.getLatestPicture = function( req, res, next ){
   var data = [
     {
