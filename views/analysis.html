@@ -7,14 +7,14 @@
     <link rel='stylesheet' href='javascripts/bootstrap/dist/css/bootstrap.min.css' />
     <link rel='stylesheet' href='stylesheets/dashboard.css' />
     <link rel='stylesheet' href='stylesheets/sticky-footer.css' />
-    <!--<script src='javascripts/chartjs/Chart.min.js' ></script>
-    <script src='javascripts/jquery/dist/jquery.min.js' ></script>-->
-    <!--<script src='javascripts/bootstrap/dist/js/bootstrap.min.js' ></script>-->
+    <script src='javascripts/chartjs/Chart.js' ></script>
+    <!--<script src='javascripts/jquery/dist/jquery.min.js' ></script>-->
+    <script src='javascripts/bootstrap/dist/js/bootstrap.min.js' ></script>
 </head>
 <body>
 
-    dsfsadfsadfsadf
-    <div>
+
+    <div id="mainContent" style="width: 1200px;" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
         <canvas id="canvas" height="450" width="600"></canvas>
     </div>
 
@@ -47,12 +47,12 @@
 
     }
 
-    window.onload = function(){
-        var ctx = document.getElementById("canvas").getContext("2d");
-        window.myLine = new Chart(ctx).Line(lineChartData, {
-            responsive: true
-        });
-    }
+    var ctx = document.getElementById("canvas").getContext("2d");
+    debugger;
+    window.myLine = new Chart(ctx).Line(lineChartData, {
+        responsive: true
+    });
+
 
 
 </script>
