@@ -10,7 +10,10 @@ exports.signIndex=function(req, res, next) {
     //console.log('sininedx');
 };
 exports.login=function(req, res, next) {
-    ///console.log('singin',req.session.views);
+    var minute = 60 * 1000;
+    if (req.body.remember){
+        res.cookie('remember', 1, { maxAge: minute });
+    }
     if (req.session.answer==req.body.answer){
         UserAccount.findOne({name:req.body.useremail,password:req.body.password},function(err,userAccount,count){
             if( err ) return next( err );
@@ -29,12 +32,13 @@ exports.register=function(req, res, next) {
     res.render('register', { title: 'Express' });
 };
 exports.registerSave=function(req, res, next) {
-    console.log('registerSave1',req.name,req.password);
+    console.log('registerSave1',req.body.email,req.body.password);
     var user = new UserAccount();
-    user.name="1";
-    user.password="1";
+    user.name=req.body.email;
+    user.password=req.body.password;
     user.save( function ( err, user, count ){
         if( err ) return next( err );
         res.send({msg:"success"});
+        //res.redirect("/signIndex");
     });
 };

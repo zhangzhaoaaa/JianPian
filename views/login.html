@@ -4,55 +4,79 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link rel='stylesheet' href='javascripts/bootstrap/dist/css/bootstrap.min.css' />
-    <link rel='stylesheet' href='stylesheets/signin.css' />
-    <script src='javascripts/jquery/dist/jquery.min.js' ></script>
-    <script src='javascripts/bootstrap/dist/js/bootstrap.min.js' ></script>
-
+    <link rel='stylesheet' href='javascripts/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='stylesheets/signin.css'/>
+    <link rel="stylesheet" href="stylesheets/jianpianvalidation.css"/>
+    <script src='javascripts/jquery/dist/jquery.min.js'></script>
+    <script src='javascripts/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="javascripts/jqueryvalidation/jquery.validate.min.js"></script>
+    <script src="javascripts/jqueryvalidation/localization/messages_zh.min.js"></script>
 </head>
 <body>
 <div class="container">
 
-    <form class="form-signin" method="post">
+    <form id="loginForm" class="form-signin" method="post">
         <h2 class="form-signin-heading">请登录</h2>
         <label id="error" style="display:none"></label>
         <label for="inputEmail" class="sr-only">邮箱</label>
-        <input type="text" name="useremail" id="inputEmail" class="form-control col-sm-4" placeholder="邮箱地址" required="" autofocus="">
+        <input type="text" name="useremail" id="inputEmail" class=" form-control col-sm-4"
+               placeholder="邮箱地址" autofocus="" required>
         <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required="">
+        <input type="password" name="password" id="inputPassword" required class=" form-control" placeholder="密码">
+
         <div id="capcha" class="capcha"><strong>给你出道题:</strong><span><a href="#" id="question">中国的首都在哪?</a></span></div>
-        <input type="text"name="capcha" id="inputCapCha" class="form-control" placeholder="验证码" required="">
+        <input type="text" name="capcha" id="inputCapCha" required class=" form-control" placeholder="验证码">
+
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="rememberme" value="remember-me"> 记住我
+                <input type="checkbox" id="remember" name="remember" value="remember-me"> 记住我
             </label>
         </div>
         <button id="login" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
+        <div class="common-margin">
+            <div>还没有帐号?<a href="/register" target="_blank">立即注册</a></div>
+        </div>
     </form>
     <script>
-        $(function(){
-            $('#login').click(function(){
-                $.post("/login", { useremail: $('#inputEmail').val(), password: $('#inputPassword').val(),answer:$('#inputCapCha').val() },
-                        function(data) {
-                            if (data.code=="success"){
-                                window.location.href="/index";
-                            }else{
-                                $('#error').show().html(data.msg);
-                            }
-                        });
+        $(function () {
+            $('#login').click(function () {
+                $("#loginForm").submit();
             });
-            $('#question').click(function(){
+            $('#question').click(function () {
                 getCapcha();
             });
-            function getCapcha(){
+            function getCapcha () {
                 $.get("/getCapcha",
-                        function(data) {
+                        function (data) {
                             // if (data.msg=="success"){
                             $('#question').empty().html(data.data.content);
                             // }
                         });
             }
-            window.onload=getCapcha();
+
+            window.onload = getCapcha();
+
+
+            $("#loginForm").validate({
+                submitHandler: function () {
+                    alert('ddd');
+                   /* $.post("/login", {
+                                useremail: $('#inputEmail').val(),
+                                password: $('#inputPassword').val(),
+                                answer: $('#inputCapCha').val(),
+                                remember: $('#remember').prop('checked')
+                            },
+                            function (data) {
+                                if (data.code == "success") {
+                                    window.location.href = "/index";
+                                } else {
+                                    $('#error').show().html(data.msg);
+                                }
+                            });*/
+                }
+            });
+
+
         });
     </script>
 </div>
