@@ -2,16 +2,29 @@ var utils    = require( '../utils' );
 var mongoose = require( 'mongoose' );
 var Todo     = mongoose.model( 'Todo' );
 exports.index = function ( req, res, next ){
-  var user_id = req.cookies ?
-    req.cookies.user : undefined;
-  if (user_id){
+  var user = req.cookies ?
+      req.cookies.user : undefined;
+  if (req.session.user||user) {
+      console.log('ddddd-----');
+      res.render( 'index', {
+        title : 'Express Todo Example',
+        userInfo:user
+      });
+  }else{
+    res.render( 'index', {
+      title : 'Express Todo Example',
+      userInfo:null
+    });
+  }
+
+  /*if (user_id){
     console.log('ddddd-----');
     res.render( 'index', {
       title : 'Express Todo Example'
     });
   }else{
     return res.redirect('/signIndex');
-  }
+  }*/
 };
 
 exports.create = function ( req, res, next ){

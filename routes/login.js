@@ -54,7 +54,8 @@ exports.login=function(req, res, next) {
 
 exports.logout = function(req,res,next){
     req.session.user=null;
-    res.redirect('/');
+    res.clearCookie("user");
+    res.redirect('/index');
 };
 exports.register=function(req, res, next) {
     console.log('register');

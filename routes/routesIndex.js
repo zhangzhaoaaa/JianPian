@@ -7,9 +7,9 @@ var picture     = require( './picture' );
 var analysis    = require( './analysis' );
 exports.routesIndex=function(app,upload){
     app.get('/',function(req,res){
-        return res.redirect('/signIndex');
+        return res.redirect('/index');
     });
-    app.get(    '/index',                       login.authentication);               //首页
+    //app.get(    '/index',                       login.authentication);               //首页
     app.get(    '/index',                       index.index);               //首页
     app.get(    '/signIndex',                   login.signIndex );          //登录页
     app.get(    '/checkUser',                   login.checkUser );          //登录页
