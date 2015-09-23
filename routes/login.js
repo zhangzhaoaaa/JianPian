@@ -4,10 +4,32 @@
 var express = require('express');
 var mongoose=require('mongoose');
 var UserAccount = mongoose.model('UserAccount');
-
+var app            = express();
+var session        = require( 'express-session');
+var MongoStore     = require( 'connect-mongo')(session);
 exports.signIndex=function(req, res, next) {
     res.render('login', { title: 'Express' });
     //console.log('sininedx');
+};
+exports.checkUser=function(req,res,next){
+    console.log(req.query.email)
+    if (req.query.email!=""){
+        UserAccount.findOne({name:req.query.email},function(err,userAccount,count){
+            if( err ) return next( err );
+            if (userAccount==null){
+                res.send("true");
+            }else{
+                res.send("false");
+            }
+        });
+    }
+};
+exports.authentication =function (req, res, next) {
+    if (!req.session.user) {
+        req.session.error='请先登陆';
+        return res.redirect('/signIndex');
+    }
+    next();
 };
 exports.login=function(req, res, next) {
     var minute = 60 * 1000;
@@ -20,12 +42,19 @@ exports.login=function(req, res, next) {
             if (userAccount==null){
                 res.send({code:"fail",msg:"用户名或者密码错误！"});
             }else{
+                res.cookie('user', userAccount, { maxAge: minute });
+                req.session.user=userAccount;
                 res.send({code:"success"});
             }
         });
     }else{
         res.send({code:"fail",msg:"验证码错误！"});
     }
+};
+
+exports.logout = function(req,res,next){
+    req.session.user=null;
+    res.redirect('/');
 };
 exports.register=function(req, res, next) {
     console.log('register');

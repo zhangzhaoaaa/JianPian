@@ -59,8 +59,7 @@
 
             $("#loginForm").validate({
                 submitHandler: function () {
-                    alert('ddd');
-                   /* $.post("/login", {
+                    $.post("/login", {
                                 useremail: $('#inputEmail').val(),
                                 password: $('#inputPassword').val(),
                                 answer: $('#inputCapCha').val(),
@@ -72,7 +71,7 @@
                                 } else {
                                     $('#error').show().html(data.msg);
                                 }
-                            });*/
+                            });
                 }
             });
 

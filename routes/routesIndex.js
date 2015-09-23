@@ -6,8 +6,15 @@ var login       = require( './login' );
 var picture     = require( './picture' );
 var analysis    = require( './analysis' );
 exports.routesIndex=function(app,upload){
+    app.get('/',function(req,res){
+        return res.redirect('/signIndex');
+    });
+    app.get(    '/index',                       login.authentication);               //首页
     app.get(    '/index',                       index.index);               //首页
     app.get(    '/signIndex',                   login.signIndex );          //登录页
+    app.get(    '/checkUser',                   login.checkUser );          //登录页
+    app.get(    '/logout',                      login.authentication );          //登录页
+    app.get(    '/logout',                      login.logout );          //登录页
     app.post(   '/login',                       login.login);               //登录动作
     app.get(    '/register',                    login.register);            //注册页
     app.post(   '/registerSave',                login.registerSave);        //注册动作

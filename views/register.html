@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>简片</title>
-    <link rel='stylesheet' href='javascripts/bootstrap/dist/css/bootstrap.min.css' />
-    <link rel='stylesheet' href='stylesheets/signin.css' />
+    <link rel='stylesheet' href='javascripts/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='stylesheets/signin.css'/>
     <link rel="stylesheet" href="stylesheets/jianpianvalidation.css"/>
-    <script src='javascripts/jquery/dist/jquery.min.js' ></script>
-    <script src='javascripts/bootstrap/dist/js/bootstrap.min.js' ></script>
-    <script src="javascripts/jqueryvalidation/jquery.validate.min.js"></script>
+    <script src='javascripts/jquery/dist/jquery.min.js'></script>
+    <script src='javascripts/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="javascripts/jqueryvalidation/jquery.validate.js"></script>
     <script src="javascripts/jqueryvalidation/localization/messages_zh.min.js"></script>
 </head>
 <body>
@@ -18,29 +18,58 @@
     <form id="regForm" class="form-signin" method="post">
         <h2 class="form-signin-heading">请注册</h2>
         <label for="inputEmail" class="sr-only">邮箱</label>
-        <input type="text" name="email" id="inputEmail" class="{required:true} form-control" placeholder="邮箱地址" required="" autofocus="">
+        <input type="text" name="email" id="inputEmail" class=" form-control" placeholder="邮箱地址"
+               autofocus="">
         <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" name="password" id="inputPassword" class="{required:true} form-control" placeholder="密码" required="">
+        <input type="password" name="password" id="inputPassword" class=" form-control" placeholder="密码"
+               >
         <button id="login" class="btn btn-lg btn-primary btn-block" type="button">注册</button>
     </form>
     <script>
-        $(function(){
-            $('#login').click(function(){
-                /*$.post("/registerSave", { email: $.trim($('#inputEmail').val()), password: $.trim($('#inputPassword').val()) },
-                        function(data) {
-                           if (data.msg=="success"){
-                               window.location.href="/signIndex";
-                           }
-                        });*/
+        $(function () {
+            $('#login').click(function () {
                 $("#regForm").submit();
             });
-            $("#regForm").validate({submitHandler: function() {
-                $.post("/registerSave", { email: $.trim($('#inputEmail').val()), password: $.trim($('#inputPassword').val()) },
-                    function(data) {
-                        if (data.msg=="success"){
-                            window.location.href="/signIndex";
-                        }
-                    }); }});
+            $.validator.addMethod("onlyLetterNum", function(value) {
+                var reg = /\w+/ig;
+                if (reg.test(value)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }, '密码仅限数字字母下划线!');
+            $("#regForm").validate({
+                rules: {
+                    email: {
+                        required: true,
+                        email: true,
+                        minlength: 6,
+                        maxlength:16,
+                        remote: "/checkUser"
+                    },
+                    password:{
+                        required: true,
+                        minlength:6,
+                        maxlength:16,
+                        onlyLetterNum:true
+                    }
+                },messages: {
+                    email: {
+                        remote:"该用户名已存在!"
+                    }
+                },
+                submitHandler: function () {
+                    $.post("/registerSave", {
+                                email: $.trim($('#inputEmail').val()),
+                                password: $.trim($('#inputPassword').val())
+                            },
+                            function (data) {
+                                if (data.msg == "success") {
+                                    window.location.href = "/signIndex";
+                                }
+                            });
+                }
+            });
         });
     </script>
 </div>
