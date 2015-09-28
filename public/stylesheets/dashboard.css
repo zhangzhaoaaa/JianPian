@@ -96,3 +96,10 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
+
+.albumBtn{
+    position: absolute;
+    top:30px;
+    right: 30px;
+    display: none;
+}

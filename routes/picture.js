@@ -23,6 +23,12 @@ exports.albumList=function(req,res,next){
         res.send({ablums:ablums});
     });
 };
+exports.deleteAlbum=function(req,res,next){
+    Album.remove({_id:req.params.id},function(err, album, count){
+        if( err ) return next( err );
+        res.send({msg:'success'});
+    });
+};
 exports.upload=function(req,res,next){
     // req.body contains the text fields
     console.log(req.files);
