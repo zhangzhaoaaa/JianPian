@@ -4,9 +4,6 @@
 var express = require('express');
 var mongoose=require('mongoose');
 var UserAccount = mongoose.model('UserAccount');
-var app            = express();
-var session        = require( 'express-session');
-var MongoStore     = require( 'connect-mongo')(session);
 exports.signIndex=function(req, res, next) {
     res.render('login', { title: 'Express' });
     //console.log('sininedx');

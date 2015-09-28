@@ -10,7 +10,13 @@ var UserAccount = new Schema({
     name    : String,
     password    : String
 });
+var Album = new Schema({
+    albumId:String,
+    albumName    : String,
+    albumDescription    : String
+});
 
 mongoose.model( 'Todo', Todo );
 mongoose.model( 'UserAccount', UserAccount );
+mongoose.model( 'Album', Album );
 mongoose.connect( 'mongodb://localhost/express-todo' );

@@ -1,6 +1,7 @@
 var utils    = require( '../utils' );
 var mongoose = require( 'mongoose' );
-var Todo     = mongoose.model( 'Todo' );
+var UserAccount = mongoose.model('UserAccount');
+var Album = mongoose.model('Album');
 exports.index = function ( req, res, next ){
   var user = req.cookies ?
       req.cookies.user : undefined;
@@ -53,8 +54,22 @@ exports.settings=function(req, res, next) {
 };
 exports.uploadPicturesIndex=function(req, res, next) {
   var id=req.params.id;
+  var minute = 60*60;
   if (id=='personalSettings'){
-    res.render('personalSettings',{ title: 'Express',msg:'personalSettings' });
+    /*UserAccount.findOne({name:req.body.useremail,password:req.body.password},function(err,userAccount,count){
+      if( err ) return next( err );
+      if (userAccount==null){
+        res.send({code:"fail",msg:"用户名或者密码错误！"});
+      }else{
+        res.cookie('user', userAccount, { maxAge: minute });
+        req.session.user=userAccount;
+        res.send({code:"success"});
+      }
+    });*/
+    Album.find({},function(req,ablums,count){
+      res.render('personalSettings',{ title: 'Express',msg:'personalSettings',ablums:ablums });
+    });
+
   }else if (id=='analysis'){
     res.render('analysis',{ title: 'Express',msg:'analysis' });
   }

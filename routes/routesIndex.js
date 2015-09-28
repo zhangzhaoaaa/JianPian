@@ -24,6 +24,8 @@ exports.routesIndex=function(app,upload){
     app.get(    '/getLastestPicture',           index.getLatestPicture);
     app.get(    '/settings',                     index.settings);
     app.get(    '/uploadPicturesIndex/:id',                     index.uploadPicturesIndex);
+    app.post(    '/createAlbum',                     picture.createAlbum);
+    app.post(    '/albumList',                     picture.albumList);
 
     //待用
     /*app.post(   '/create',                      routes.create );

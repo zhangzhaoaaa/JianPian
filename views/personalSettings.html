@@ -9,27 +9,18 @@
         </button>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-lg-3 ">
-            <div class="thumbnail" style="height: 334px;">
-                <a href="/albumPictureIndex" title="Bootstrap 编码规范" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])"><img class="lazy" src="http://static.bootcss.com/www/assets/img/codeguide.png" width="300" height="280" data-src="http://static.bootcss.com/www/assets/img/codeguide.png" alt="Headroom.js"></a>
-                <div class="caption">
-                    <p>
-                        大理旅游/2015.8.29
-                    </p>
+        <% for(var index=0,len=ablums.length;index<len;index++){%>
+            <div class="col-sm-6 col-md-4 col-lg-3 ">
+                <div class="thumbnail" style="height: 334px;">
+                    <a href="/albumPictureIndex" title="Bootstrap 编码规范" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])"><img class="lazy" src="http://static.bootcss.com/www/assets/img/codeguide.png" width="300" height="280" data-src="http://static.bootcss.com/www/assets/img/codeguide.png" alt="Headroom.js"></a>
+                    <div class="caption">
+                        <p>
+                            <%=ablums[index].albumName%>/2015.8.29
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 ">
-            <div class="thumbnail" style="height: 334px;">
-                <a href="/albumPictureIndex" title="Bootstrap 编码规范" target="_blank" onclick="_hmt.push(['_trackEvent', 'tile', 'click', 'codeguide'])"><img class="lazy" src="http://static.bootcss.com/www/assets/img/codeguide.png" width="300" height="150" data-src="http://static.bootcss.com/www/assets/img/codeguide.png" alt="Headroom.js"></a>
-                <div class="caption">
-                    <p>
-                        欧洲五国/2016.3.18
-                    </p>
-                </div>
-            </div>
-        </div>
-
+        <%}%>
 
         <!-- 模态框（Modal） -->
         <div class="modal fade" id="uploadPicModal" tabindex="-1" role="dialog"
@@ -97,7 +88,7 @@
                         </h4>
                     </div>
                     <div class="modal-body">
-                        <form class = "form-horizontal" enctype='multipart/form-data' method='post' role = "form" id = "frmUploadFile">
+                        <form class = "form-horizontal"  method='post' role = "form" id = "frmAlbum">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">相册名称</label>
                                 <div class="col-sm-10">
@@ -108,7 +99,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">相册描述</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3"></textarea>
+                                    <textarea class="form-control" id="albumDescription" rows="3"></textarea>
                                 </div>
                             </div>
                         </form>
@@ -117,7 +108,7 @@
                         <button type="button" class="btn btn-default"
                                 data-dismiss="modal">取消
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" id="createAlblum" class="btn btn-primary">
                             确定
                         </button>
                     </div>
@@ -136,6 +127,17 @@
 
         $('#createAlbumModalBtn').on("click",function () {
             $('#createAlbumModal').modal('show');
+        });
+
+        $('#createAlblum').on('click',function(){
+            $.post('/createAlbum',{albumName:$('#albumName').val(),albumDescription:$('#albumDescription').val()},function(data){
+                if (data.msg=='success'){
+                    $('#createAlbumModal').modal('hide');
+                    setTimeout(function(){
+                        $('#id_albumlist').trigger('click');
+                    },2000);
+                }
+            });
         });
     });
 

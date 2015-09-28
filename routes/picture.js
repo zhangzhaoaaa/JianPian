@@ -4,10 +4,25 @@
 var utils       = require( '../utils' );
 var mongoose    = require( 'mongoose' );
 var fs          = require( 'fs');
+var Album = mongoose.model('Album');
 exports.albumPictureIndex=function(req, res, next) {
     res.render('albumPictureIndex', { title: 'Express' });
 };
-
+exports.createAlbum=function(req,res,next){
+    new Album(
+        {   albumId:1,
+            albumName:req.body.albumName,
+            albumDescription:req.body.albumDescription
+        }).save(function(err, album, count ){
+            if( err ) return next( err );
+            res.send({msg:'success'});
+        });
+};
+exports.albumList=function(req,res,next){
+    Album.find({},function(req,ablums,count){
+        res.send({ablums:ablums});
+    });
+};
 exports.upload=function(req,res,next){
     // req.body contains the text fields
     console.log(req.files);
